@@ -1,35 +1,30 @@
 class Solution {
 public:
     vector<vector<int>> onesMinusZeros(vector<vector<int>>& grid) {
-        unordered_map<int,int> Or;
-        unordered_map<int,int> oc,zr,zc;
-        int n=grid.size() ,m=grid[0].size();
+        int n=grid.size(),m=grid[0].size();
 
+        vector<int> row(n),col(m);
         for(int i=0;i<n;i++){
-            int z=0,o=0;
+            int count=0;
             for(int j=0;j<m;j++){
-                if(grid[i][j]==1) o++;
-                else z++;
+                if(grid[i][j]==1) count++;
             }
 
-            Or[i]=o;
-            zr[i]=z;
-        } 
+            row[i]=count;
+        }
 
          for(int j=0;j<m;j++){
-            int z=0,o=0;
+            int count=0;
             for(int i=0;i<n;i++){
-                if(grid[i][j]==1) o++;
-                else z++;
+                if(grid[i][j]==1) count++;
             }
 
-            oc[j]=o;
-            zc[j]=z;
-        } 
+            col[j]=count;
+        }
 
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
-                grid[i][j]=Or[i]+oc[j]-zr[i]-zc[j];
+                grid[i][j]=row[i]+col[j]-(n-row[i])-(m-col[j]);
             }
         }
 
