@@ -10,16 +10,16 @@ class Solution{
 	int N=0;
 	
 	long long f(int i,int sum,int nums[],vector<vector<long long>>&dp){
-	    if(i>=N){
+	    if(i<0){
 	        if(sum==0) return 1;
 	        return 0;
 	    }
 	    if(dp[i][sum]!=-1) return dp[i][sum];
 	    
 	    long long ntake=0,take=0;
-	    ntake=f(i+1,sum,nums,dp)%mod;
+	    ntake=f(i-1,sum,nums,dp)%mod;
 	    if(nums[i]<=sum){
-	        take=f(i+1,sum-nums[i],nums,dp)%mod;
+	        take=f(i-1,sum-nums[i],nums,dp)%mod;
 	    }
 	    return dp[i][sum]=(take+ntake)%mod;
 	}
@@ -30,7 +30,7 @@ class Solution{
         // sort(arr,arr+n);
         N=n;
         vector<vector<long long>> dp(n+1,vector<long long>(sum+1,-1));
-        return f(0,sum,arr,dp);
+        return f(n-1,sum,arr,dp);
 	}
 	  
 };
