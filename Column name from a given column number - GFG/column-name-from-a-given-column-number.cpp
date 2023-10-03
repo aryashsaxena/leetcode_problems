@@ -12,28 +12,12 @@ class Solution{
         // your code here
         string ans="";
         
-        while(n){
-            int x;
-             int f=0;
+        while(n>0){
+            n--;
+            char ch=((n%26))+'A';
+            ans= ch + ans;
             
-            if(n%26!=0){
-                x=n%26;
-            }
-            else if(n<=26) x=n;
-            else{
-                x=26;
-                n=(n/26);
-                n--;
-                f=1;
-            }
-            
-            char ch=(x-1)+'A';
-            ans= ch+ ans;
-            
-            if(n==26 && f==0) break;
-            if(f==0)
             n/=26;
-
         }
         return ans;
     }
