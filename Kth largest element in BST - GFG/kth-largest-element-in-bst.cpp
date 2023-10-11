@@ -101,30 +101,29 @@ class Solution
     {
         //Your code here
         stack<Node*> st;
-        Node* temp=root;
         
-        while(temp){
-            st.push(temp);
-            temp=temp->right;
+        Node* node=root;
+        while(node){
+            st.push(node);
+            node=node->right;
         }
         
-        while(!st.empty()){
-            auto t=st.top();
+        while(k){
+            auto it=st.top();
             st.pop();
             
-            if(k==1) return t->data;
-            k--;
+            if(k==1) return it->data;
             
-            if(t->left){
-                st.push(t->left);
-                auto t1=t->left->right;
-                while(t1){
-                    st.push(t1);
-                    t1=t1->right;
+            k--;
+            if(it->left){
+                Node* node=it->left;
+                while(node){
+                    st.push(node);
+                    node=node->right;
                 }
             }
         }
-        return root->data;
+        return -1;
     }
 };
 
